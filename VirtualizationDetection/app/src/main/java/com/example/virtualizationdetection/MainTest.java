@@ -19,8 +19,15 @@ public class MainTest {
     public void getStarted() {
         try {
 
-            Class target = this.getClass();
-            Method targetMethod = target.getDeclaredMethod("test");
+            Class target = Class.forName("android.app.Activity");
+            Method targetMethod = null;
+            for ( Method method : target.getDeclaredMethods()) {
+                if (method.getName().equals("startActivity") ){
+                    targetMethod = method;
+                    break;
+                }
+            }
+
             ArtMethod artMethod = ArtMethod.of(targetMethod);
             if (artMethod == null) {
                 Log.d("MainTest", "Method not found!");
@@ -40,7 +47,7 @@ public class MainTest {
                 Log.d("MainTest", "Reading field: =" + val + " from " + artMethod.associatedMethod);
             }
 
-        } catch (NoSuchMethodException | ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
+        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }
