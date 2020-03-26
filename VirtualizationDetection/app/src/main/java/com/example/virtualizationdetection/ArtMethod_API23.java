@@ -125,20 +125,16 @@ import java.lang.reflect.Method;
 public class ArtMethod_API23 extends ArtMethod{
 
     private StructMember dex_code_item_offset_;
-    private StructMember access_flags_;
 
     public ArtMethod_API23(Method method){
         super(method);
 
         dex_code_item_offset_ = new StructMember(methodAddress,16,4);
-        access_flags_ = new StructMember(methodAddress,12,4);
+
     }
 
     public int getDexCodeItemOffset() {
         return dex_code_item_offset_.readInt();
     }
 
-    public int getAccessFlags() {
-        return access_flags_.readInt();
-    }
 }

@@ -9,6 +9,7 @@ import android.util.Log;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public class MainTest {
 
@@ -16,39 +17,40 @@ public class MainTest {
 
     public void test(){ Log.d("MainTest","Default test");}
 
-    public void getStarted() {
+    public String getStarted() {
         try {
 
+
             Class target = Class.forName("android.app.Activity");
-            Method targetMethod = null;
+            //Method targetMethod = target.getDeclaredMethod("");
+            ArrayList<Method> list = new ArrayList<>();
             for ( Method method : target.getDeclaredMethods()) {
-                if (method.getName().equals("startActivity") ){
-                    targetMethod = method;
-                    break;
+                method.setAccessible(true);
+                //if (method.getName().equals("startActivity") ){
+                    list.add(method);
+                //}
+            }
+            String toReturn = "";
+            for ( Method targetMethod : list ) {
+                targetMethod.setAccessible(true);
+                ArtMethod artMethod = ArtMethod.of(targetMethod);
+                if (artMethod == null) {
+                    Log.d("MainTest", "Method not found!");
+                    return "Method not found!";
                 }
+                Log.d("MainTest", artMethod.toString());
+
+                int dexCodeItemOffset = artMethod.getDexCodeItemOffset();
+
+                Log.d("MainTest", "dex_code_item_offset_=  " + dexCodeItemOffset);
+
+                toReturn += "\n Method: " + targetMethod.getName() + " - " + dexCodeItemOffset + "    ";
             }
 
-            ArtMethod artMethod = ArtMethod.of(targetMethod);
-            if (artMethod == null) {
-                Log.d("MainTest", "Method not found!");
-                return;
-            }
-            Log.d("MainTest", artMethod.toString());
-            Log.d("MainTest", "dex_code_item_offset_=  " + artMethod.getDexCodeItemOffset());
+            return toReturn;
 
-            if(Build.VERSION.SDK_INT < 26 && Build.VERSION.SDK_INT > 22)
-                Log.d("MainTest", "access_flags_=  " + artMethod.getAccessFlags());
-
-            if(Build.VERSION.SDK_INT < 26) {
-                Field field = Class.forName("java.lang.reflect.AbstractMethod").getDeclaredField("accessFlags");
-                Log.d("MainTest", "Read");
-                field.setAccessible(true);
-                Object val = field.get(artMethod.associatedMethod);
-                Log.d("MainTest", "Reading field: =" + val + " from " + artMethod.associatedMethod);
-            }
-
-        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+         return e.getLocalizedMessage();
         }
     }
 }

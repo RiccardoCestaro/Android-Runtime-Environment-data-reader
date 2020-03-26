@@ -7,8 +7,6 @@ defined by either the offset of the bytecode item of
 this specific method within the DEX file where it is included,
 or 0 if the method is either abstract or native.
 
-This value changes in hooked methods.
-
 ## How to use
 
 Simply write the class and the method where we are going to read 

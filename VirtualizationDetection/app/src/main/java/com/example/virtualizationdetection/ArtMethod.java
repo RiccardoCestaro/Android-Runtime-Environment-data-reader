@@ -49,16 +49,7 @@ public abstract  class ArtMethod {
         return null;
     }
 
-
     public abstract int getDexCodeItemOffset();
-
-    public int getAccessFlags(){
-        return 0;
-    };
-
-    public long getDexCacheResolvedTypes() {
-        return 0;
-    }
 
     @Override
     public String toString(){
