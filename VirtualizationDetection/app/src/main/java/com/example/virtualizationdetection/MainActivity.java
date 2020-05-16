@@ -21,7 +21,12 @@ public class MainActivity extends AppCompatActivity {
         main.dynamicProxyTest();
 
         //String value = main.getStarted("android.app.Activity");
-        String value = "ciao";
+
+
+
+
+
+        String value = new MainTest().getStarted("android.app.Activity");
 
         Log.d("mainActivity",value);
 

@@ -54,7 +54,7 @@ public class MainTest {
                         Log.i("PROXYYYYY   ",a.getName() + "   " + a.getDeclaringClass().getName() + "  " );
                     }
 
-                    new MainTest().getStarted("com.example.virtualizationdetection.$Proxy0");
+                    //new MainTest().getStarted("com.example.virtualizationdetection.$Proxy0");
 
 
 
@@ -64,6 +64,7 @@ public class MainTest {
 
                 method.invoke(original, args);
                 System.out.println("AFTER");
+                //new MainTest().getStarted("com.example.virtualizationdetection.$Proxy0");
                 return null;
             }
         }
@@ -214,6 +215,7 @@ public class MainTest {
         }
     }
     public JdkProxyDemo.If ciao;
+    public JdkProxyDemo.Original ciao2 = new JdkProxyDemo.Original();
 
     public void dynamicProxyTest(){
        JdkProxyDemo.Original original = new JdkProxyDemo.Original();
@@ -221,9 +223,18 @@ public class MainTest {
         ciao = (JdkProxyDemo.If) Proxy.newProxyInstance(JdkProxyDemo.If.class.getClassLoader(),
                 new Class[] { JdkProxyDemo.If.class },
                 handler);
-        ciao.originalMethod("Hallo");
+        ciao.originalMethod("Hadergrtgllo");
         Log.i("PROXYYYYYY"   , ciao.getClass().toString());
         //Log.i("PROXYYYYYY   ",Boolean.toString(Proxy.isProxyClass(JdkProxyDemo.class)));
+        ciao2.originalMethod("ciaderfo");
+        ciao2.originalMethod("casiao");
+        ciao2.originalMethod("ciao");
+        ciao2.originalMethod("ciaasao");
+        ciao.originalMethod("Hallasdsfro");
+    }
+
+    public void callOriginalMethodNotProxied(){
+        new JdkProxyDemo.Original().originalMethod("ciao");
     }
 
 
