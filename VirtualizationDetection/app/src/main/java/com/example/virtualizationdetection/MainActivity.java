@@ -17,7 +17,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String value = new MainTest().getStarted();
+        MainTest main = new MainTest();
+        main.dynamicProxyTest();
+
+        //String value = main.getStarted("android.app.Activity");
+        String value = "ciao";
 
         Log.d("mainActivity",value);
 
