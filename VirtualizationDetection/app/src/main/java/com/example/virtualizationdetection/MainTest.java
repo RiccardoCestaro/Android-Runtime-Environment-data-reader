@@ -73,14 +73,14 @@ public class MainTest {
 
 
 
-    public String getStarted(String classProxyName) {
-        try {
+    public String getStarted(Class<?> classProxyName) {
+
             JdkProxyDemo.Original a = new JdkProxyDemo.Original();
             Class originalclass = a.getClass();
-            Class target = Class.forName(classProxyName);
+
             //Method targetMethod = target.getDeclaredMethod("");
             ArrayList<Method> list = new ArrayList<>();
-            for ( Method method : target.getDeclaredMethods()) {
+            for ( Method method : classProxyName.getDeclaredMethods()) {
                 method.setAccessible(true);
                 if (method.getName().equals("originalMethod") ){
                     list.add(method);
@@ -109,7 +109,7 @@ public class MainTest {
 
                 toReturn += "\n Method: " + targetMethod.getName() + " - " + dexCodeItemOffset + "    ";
 
-                if( artMethod instanceof ArtMethod_API24_25) {
+                if (artMethod instanceof ArtMethod_API24_25) {
                     int declaringClass = ((ArtMethod_API24_25) artMethod).getDeclaringClass();
                     int accessFlags = ((ArtMethod_API24_25) artMethod).getAccessFlags();
                     int dexMethodIndex = ((ArtMethod_API24_25) artMethod).getDexMethodIndex();
@@ -133,7 +133,7 @@ public class MainTest {
                     Log.d("MainTest", "\n method_index_ " + methodIndex + "  ");
 
                     toReturn += "\n hotness_count_ " + hotnessCount + "  ";
-                    Log.d("MainTest",  "\n hotness_count_ " + hotnessCount + "  ");
+                    Log.d("MainTest", "\n hotness_count_ " + hotnessCount + "  ");
 
                     toReturn += "\n dex_cache_resolved_method_ " + dexCacheResolvedMethod + "  ";
                     Log.d("MainTest", "\n dex_cache_resolved_method_ " + dexCacheResolvedMethod + "  ");
@@ -143,6 +143,40 @@ public class MainTest {
 
                     toReturn += "\n entry_point_from_jni_" + entryPointFromJni + "  ";
                     Log.d("MainTest", "\n entry_point_from_jni_" + entryPointFromJni + "  ");
+
+                    toReturn += "\n entry_point_from_quick_compiled_code_" + entryPointFromQuickCompiledCode + "  ";
+                    Log.d("MainTest", "\n entry_point_from_quick_compiled_code_" + entryPointFromQuickCompiledCode + "  ");
+
+                } else if (artMethod instanceof ArtMethod_API29) {
+                    int declaringClass = ((ArtMethod_API29) artMethod).getDeclaringClass();
+                    int accessFlags = ((ArtMethod_API29) artMethod).getAccessFlags();
+                    int dexMethodIndex = ((ArtMethod_API29) artMethod).getDexMethodIndex();
+                    long methodIndex = ((ArtMethod_API29) artMethod).getMethodIndex();
+                    int hotnessCount = ((ArtMethod_API29) artMethod).getHotnessCount();
+                    int imtIndex = ((ArtMethod_API29) artMethod).getImtIndex();
+                    int data = ((ArtMethod_API29) artMethod).getData();
+                    int entryPointFromQuickCompiledCode = ((ArtMethod_API29) artMethod).getEntryPointFromQuickCompiledCode();
+
+                    toReturn += "\n declaring_class_ = " + declaringClass + "  ";
+                    Log.d("MainTest", "\n declaring_class_ = " + declaringClass + "  ");
+
+                    toReturn += "\n access_flags_ = " + accessFlags + "  ";
+                    Log.d("MainTest", "\n access_flags_ = " + accessFlags + "  ");
+
+                    toReturn += "\n dex_method_index_ " + dexMethodIndex + "  ";
+                    Log.d("MainTest", "\n dex_method_index_ " + dexMethodIndex + "  ");
+
+                    toReturn += "\n method_index_ " + methodIndex + "  ";
+                    Log.d("MainTest", "\n method_index_ " + methodIndex + "  ");
+
+                    toReturn += "\n hotness_count_ " + hotnessCount + "  ";
+                    Log.d("MainTest", "\n hotness_count_ " + hotnessCount + "  ");
+
+                    toReturn += "\n imt_index_ " + imtIndex + "  ";
+                    Log.d("MainTest", "\n imt_index_ " + imtIndex + "  ");
+
+                    toReturn += "\n data_ " + data + "  ";
+                    Log.d("MainTest", "\n data_ " + data + "  ");
 
                     toReturn += "\n entry_point_from_quick_compiled_code_" + entryPointFromQuickCompiledCode + "  ";
                     Log.d("MainTest", "\n entry_point_from_quick_compiled_code_" + entryPointFromQuickCompiledCode + "  ");
@@ -204,20 +238,52 @@ public class MainTest {
                     Log.d("MainTest", "\n entry_point_from_quick_compiled_code_" + entryPointFromQuickCompiledCode + "  ");
 
 
+                } else if (artMethod instanceof ArtMethod_API29) {
+                    int declaringClass = ((ArtMethod_API29) artMethod).getDeclaringClass();
+                    int accessFlags = ((ArtMethod_API29) artMethod).getAccessFlags();
+                    int dexMethodIndex = ((ArtMethod_API29) artMethod).getDexMethodIndex();
+                    long methodIndex = ((ArtMethod_API29) artMethod).getMethodIndex();
+                    int hotnessCount = ((ArtMethod_API29) artMethod).getHotnessCount();
+                    int imtIndex = ((ArtMethod_API29) artMethod).getImtIndex();
+                    int data = ((ArtMethod_API29) artMethod).getData();
+                    int entryPointFromQuickCompiledCode = ((ArtMethod_API29) artMethod).getEntryPointFromQuickCompiledCode();
+
+                    toReturn += "\n declaring_class_ = " + declaringClass + "  ";
+                    Log.d("MainTest", "\n declaring_class_ = " + declaringClass + "  ");
+
+                    toReturn += "\n access_flags_ = " + accessFlags + "  ";
+                    Log.d("MainTest", "\n access_flags_ = " + accessFlags + "  ");
+
+                    toReturn += "\n dex_method_index_ " + dexMethodIndex + "  ";
+                    Log.d("MainTest", "\n dex_method_index_ " + dexMethodIndex + "  ");
+
+                    toReturn += "\n method_index_ " + methodIndex + "  ";
+                    Log.d("MainTest", "\n method_index_ " + methodIndex + "  ");
+
+                    toReturn += "\n hotness_count_ " + hotnessCount + "  ";
+                    Log.d("MainTest", "\n hotness_count_ " + hotnessCount + "  ");
+
+                    toReturn += "\n imt_index_ " + imtIndex + "  ";
+                    Log.d("MainTest", "\n imt_index_ " + imtIndex + "  ");
+
+                    toReturn += "\n data_ " + data + "  ";
+                    Log.d("MainTest", "\n data_ " + data + "  ");
+
+                    toReturn += "\n entry_point_from_quick_compiled_code_" + entryPointFromQuickCompiledCode + "  ";
+                    Log.d("MainTest", "\n entry_point_from_quick_compiled_code_" + entryPointFromQuickCompiledCode + "  ");
+
+
                 }
             }
 
 
             return toReturn;
 
-        } catch (ClassNotFoundException e) {
-         return e.getLocalizedMessage();
-        }
     }
     public JdkProxyDemo.If ciao;
     public JdkProxyDemo.Original ciao2 = new JdkProxyDemo.Original();
 
-    public void dynamicProxyTest(){
+    public Class<?> dynamicProxyTest(){
        JdkProxyDemo.Original original = new JdkProxyDemo.Original();
         JdkProxyDemo.Handler handler = new JdkProxyDemo.Handler(original);
         ciao = (JdkProxyDemo.If) Proxy.newProxyInstance(JdkProxyDemo.If.class.getClassLoader(),
@@ -229,8 +295,8 @@ public class MainTest {
         ciao2.originalMethod("ciaderfo");
         ciao2.originalMethod("casiao");
         ciao2.originalMethod("ciao");
-        ciao2.originalMethod("ciaasao");
-        ciao.originalMethod("Hallasdsfro");
+
+        return ciao.getClass();
     }
 
     public void callOriginalMethodNotProxied(){

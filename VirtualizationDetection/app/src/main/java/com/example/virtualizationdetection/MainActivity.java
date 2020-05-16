@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         MainTest main = new MainTest();
-        main.dynamicProxyTest();
+        Class<?> klazz = main.dynamicProxyTest();
 
         //String value = main.getStarted("android.app.Activity");
 
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        String value = new MainTest().getStarted("android.app.Activity");
+        String value = new MainTest().getStarted(klazz);
 
         Log.d("mainActivity",value);
 
