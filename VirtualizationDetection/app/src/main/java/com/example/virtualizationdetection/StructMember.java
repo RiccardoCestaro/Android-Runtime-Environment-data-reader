@@ -58,4 +58,8 @@ public class StructMember {
         return Platform.getPlatform().orderByteToLong(read());
     }
 
+    public short readShort() {
+        return Platform.getPlatform().orderByteToShort(read());
+    }
+
 }

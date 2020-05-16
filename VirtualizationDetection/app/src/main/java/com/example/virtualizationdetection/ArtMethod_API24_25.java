@@ -16,7 +16,7 @@
  *   ***************************
  *          * offset * length  *
  *   32 bit *    0        4    *
- *   64 bit *                  *
+ *   64 bit *    0        4    *
  *   ***************************
  *
  *   // Access flags; low 16 bits are defined by spec.
@@ -44,7 +44,7 @@
  *   ***************************
  *          * offset * length  *
  *   32 bit *   12        4    *
- *   64 bit *                  *
+ *   64 bit *   12        4    *
  *   ***************************
  *
  *   // End of dex file fields.
@@ -119,21 +119,134 @@
 
 package com.example.virtualizationdetection;
 
+import android.util.Log;
+
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
 
 public class ArtMethod_API24_25 extends ArtMethod{
 
+    private StructMember declaring_class_;
+
+    private StructMember access_flags_;
+
     private StructMember dex_code_item_offset_;
+
+    private StructMember dex_method_index_;
+
+    private StructMember method_index_;
+
+    private StructMember hotness_count_;
+
+    private StructMember dex_cache_resolved_method_;
+
+    private StructMember dex_cache_resolved_types_;
+
+    private StructMember entry_point_from_jni_;
+
+    private StructMember entry_point_from_quick_compiled_code_;
+
 
     public ArtMethod_API24_25(Method method){
         super(method);
 
+        declaring_class_ = new StructMember(methodAddress, 0,4);
+
+        access_flags_ = new StructMember(methodAddress, 4,4);
+
         dex_code_item_offset_ = new StructMember(methodAddress,8,4);
+
+        dex_method_index_ = new StructMember(methodAddress, 12, 4);
+
+        method_index_ = new StructMember(methodAddress, 16, 2);
+
+        hotness_count_ = new StructMember(methodAddress, 18, 2);
+
+        dex_cache_resolved_method_ = new StructMember(methodAddress, 20, 8);
+
+        dex_cache_resolved_types_ = new StructMember(methodAddress, 28, 8);
+
+        entry_point_from_jni_ = new StructMember(methodAddress, 36, 8);
+
+        entry_point_from_quick_compiled_code_ = new StructMember(methodAddress, 44, 8);
     }
+
+
+    public int getDeclaringClass() { return declaring_class_.readInt(); }
+
+    public int getAccessFlags() {
+        String accessFlagFromJava="";
+        try {
+            Class<?> abstractMethodClass = Class.forName("java.lang.reflect.AbstractMethod");
+            //Class<?> artMethodClass = Class.forName("java.lang.reflect.ArtMethod");
+            //
+            Field accessField = abstractMethodClass.getDeclaredField("accessFlags");
+            accessField.setAccessible(true);
+
+            //Field dexCodeItemOffset = artMethodClass.getDeclaredField("dexCodeItemOffset");
+            Object accessFlag = accessField.get(associatedMethod);
+            //dexCodeItemOffset.setAccessible(true);
+            accessFlagFromJava = accessFlag.toString();
+
+        }catch(ClassNotFoundException | NoSuchFieldException | IllegalAccessException e){
+            e.printStackTrace();
+        }
+
+        int accessFlags = access_flags_.readInt();
+        if(!accessFlagFromJava.equals(Integer.toString(accessFlags)))
+            Log.w("ArtMethod_API24_25","Fail to read accessFlag from the memory !!!");
+
+        return access_flags_.readInt();
+    }
+
 
     public int getDexCodeItemOffset() {
         return dex_code_item_offset_.readInt();
     }
+
+    public int getDexMethodIndex() {
+
+
+        String accessFlagFromJava="";
+        try {
+            Class<?> abstractMethodClass = Class.forName("java.lang.reflect.AbstractMethod");
+            //Class<?> artMethodClass = Class.forName("java.lang.reflect.ArtMethod");
+            //
+            Field accessField = abstractMethodClass.getDeclaredField("dexMethodIndex");
+            accessField.setAccessible(true);
+
+            //Field dexCodeItemOffset = artMethodClass.getDeclaredField("dexCodeItemOffset");
+            Object accessFlag = accessField.get(associatedMethod);
+            //dexCodeItemOffset.setAccessible(true);
+            accessFlagFromJava = accessFlag.toString();
+
+
+        }catch(ClassNotFoundException | NoSuchFieldException | IllegalAccessException e){
+            e.printStackTrace();
+        }
+
+        int accessFlags = dex_method_index_.readShort();
+        if(!accessFlagFromJava.equals(Integer.toString(accessFlags)))
+            Log.w("ArtMethod_API24_25","Fail to read dexMethodIndex from the memory !!!    real: " + accessFlagFromJava + "   from memory: " + accessFlags);
+
+        return accessFlags;
+    }
+
+    public short getMethodIndex() {
+
+
+        return method_index_.readShort(); }
+
+    public int getHotnessCount() { return hotness_count_.readShort(); }
+
+    public long getDexCacheResolvedMethod() { return dex_cache_resolved_method_.readLong(); }
+
+    public int getDexCacheResolvedTypes() { return dex_cache_resolved_types_.readInt(); }
+
+    public int getEntryPointFromJni() { return entry_point_from_jni_.readInt(); }
+
+    public int getEntryPointFromQuickCompiledCode() { return entry_point_from_quick_compiled_code_.readInt(); }
 
 
 }

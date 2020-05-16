@@ -107,6 +107,47 @@ public class MainTest {
                 Log.d("MainTest", "dex_code_item_offset_=  " + dexCodeItemOffset);
 
                 toReturn += "\n Method: " + targetMethod.getName() + " - " + dexCodeItemOffset + "    ";
+
+                if( artMethod instanceof ArtMethod_API24_25) {
+                    int declaringClass = ((ArtMethod_API24_25) artMethod).getDeclaringClass();
+                    int accessFlags = ((ArtMethod_API24_25) artMethod).getAccessFlags();
+                    int dexMethodIndex = ((ArtMethod_API24_25) artMethod).getDexMethodIndex();
+                    long methodIndex = ((ArtMethod_API24_25) artMethod).getMethodIndex();
+                    int hotnessCount = ((ArtMethod_API24_25) artMethod).getHotnessCount();
+                    long dexCacheResolvedMethod = ((ArtMethod_API24_25) artMethod).getDexCacheResolvedMethod();
+                    int dexCacheResolvedTypes = ((ArtMethod_API24_25) artMethod).getDexCacheResolvedTypes();
+                    int entryPointFromJni = ((ArtMethod_API24_25) artMethod).getEntryPointFromJni();
+                    int entryPointFromQuickCompiledCode = ((ArtMethod_API24_25) artMethod).getEntryPointFromQuickCompiledCode();
+
+                    toReturn += "\n declaring_class_ = " + declaringClass + "  ";
+                    Log.d("MainTest", "\n declaring_class_ = " + declaringClass + "  ");
+
+                    toReturn += "\n access_flags_ = " + accessFlags + "  ";
+                    Log.d("MainTest", "\n access_flags_ = " + accessFlags + "  ");
+
+                    toReturn += "\n dex_method_index_ " + dexMethodIndex + "  ";
+                    Log.d("MainTest", "\n dex_method_index_ " + dexMethodIndex + "  ");
+
+                    toReturn += "\n method_index_ " + methodIndex + "  ";
+                    Log.d("MainTest", "\n method_index_ " + methodIndex + "  ");
+
+                    toReturn += "\n hotness_count_ " + hotnessCount + "  ";
+                    Log.d("MainTest",  "\n hotness_count_ " + hotnessCount + "  ");
+
+                    toReturn += "\n dex_cache_resolved_method_ " + dexCacheResolvedMethod + "  ";
+                    Log.d("MainTest", "\n dex_cache_resolved_method_ " + dexCacheResolvedMethod + "  ");
+
+                    toReturn += "\n dex_cache_resolved_types_" + dexCacheResolvedTypes + "  ";
+                    Log.d("MainTest", "\n dex_cache_resolved_types_" + dexCacheResolvedTypes + "  ");
+
+                    toReturn += "\n entry_point_from_jni_" + entryPointFromJni + "  ";
+                    Log.d("MainTest", "\n entry_point_from_jni_" + entryPointFromJni + "  ");
+
+                    toReturn += "\n entry_point_from_quick_compiled_code_" + entryPointFromQuickCompiledCode + "  ";
+                    Log.d("MainTest", "\n entry_point_from_quick_compiled_code_" + entryPointFromQuickCompiledCode + "  ");
+
+
+                }
             }
             for ( Method targetMethod : originalList ) {
                 targetMethod.setAccessible(true);
@@ -122,7 +163,50 @@ public class MainTest {
                 Log.d("MainTest", "dex_code_item_offset_=  " + dexCodeItemOffset);
 
                 toReturn += "\n Method: " + targetMethod.getName() + " - " + dexCodeItemOffset + "    ";
+
+                if( artMethod instanceof ArtMethod_API24_25) {
+                    int declaringClass = ((ArtMethod_API24_25) artMethod).getDeclaringClass();
+                    int accessFlags = ((ArtMethod_API24_25) artMethod).getAccessFlags();
+                    int dexMethodIndex = ((ArtMethod_API24_25) artMethod).getDexMethodIndex();
+                    long methodIndex = ((ArtMethod_API24_25) artMethod).getMethodIndex();
+                    int hotnessCount = ((ArtMethod_API24_25) artMethod).getHotnessCount();
+                    long dexCacheResolvedMethod = ((ArtMethod_API24_25) artMethod).getDexCacheResolvedMethod();
+                    int dexCacheResolvedTypes = ((ArtMethod_API24_25) artMethod).getDexCacheResolvedTypes();
+                    int entryPointFromJni = ((ArtMethod_API24_25) artMethod).getEntryPointFromJni();
+                    int entryPointFromQuickCompiledCode = ((ArtMethod_API24_25) artMethod).getEntryPointFromQuickCompiledCode();
+
+                    toReturn += "\n declaring_class_ = " + declaringClass + "  ";
+                    Log.d("MainTest", "\n declaring_class_ = " + declaringClass + "  ");
+
+                    toReturn += "\n access_flags_ = " + accessFlags + "  ";
+                    Log.d("MainTest", "\n access_flags_ = " + accessFlags + "  ");
+
+                    toReturn += "\n dex_method_index_ " + dexMethodIndex + "  ";
+                    Log.d("MainTest", "\n dex_method_index_ " + dexMethodIndex + "  ");
+
+                    toReturn += "\n method_index_ " + methodIndex + "  ";
+                    Log.d("MainTest", "\n method_index_ " + methodIndex + "  ");
+
+                    toReturn += "\n hotness_count_ " + hotnessCount + "  ";
+                    Log.d("MainTest",  "\n hotness_count_ " + hotnessCount + "  ");
+
+                    toReturn += "\n dex_cache_resolved_method_ " + dexCacheResolvedMethod + "  ";
+                    Log.d("MainTest", "\n dex_cache_resolved_method_ " + dexCacheResolvedMethod + "  ");
+
+                    toReturn += "\n dex_cache_resolved_types_" + dexCacheResolvedTypes + "  ";
+                    Log.d("MainTest", "\n dex_cache_resolved_types_" + dexCacheResolvedTypes + "  ");
+
+                    toReturn += "\n entry_point_from_jni_" + entryPointFromJni + "  ";
+                    Log.d("MainTest", "\n entry_point_from_jni_" + entryPointFromJni + "  ");
+
+                    toReturn += "\n entry_point_from_quick_compiled_code_" + entryPointFromQuickCompiledCode + "  ";
+                    Log.d("MainTest", "\n entry_point_from_quick_compiled_code_" + entryPointFromQuickCompiledCode + "  ");
+
+
+                }
             }
+
+
             return toReturn;
 
         } catch (ClassNotFoundException e) {
