@@ -24,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+        main.callOriginalMethodNotProxied();
+        main.callOriginalMethodNotProxied();
+        main.callOriginalMethodNotProxied();
 
         String value = new MainTest().getStarted(klazz);
 

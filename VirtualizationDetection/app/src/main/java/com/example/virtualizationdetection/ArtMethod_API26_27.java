@@ -116,16 +116,79 @@ import java.lang.reflect.Method;
 
 public class ArtMethod_API26_27 extends ArtMethod{
 
+    private StructMember declaring_class_;
+
+    private StructMember access_flags_;
+
     private StructMember dex_code_item_offset_;
+
+    private StructMember dex_method_index_;
+
+    private StructMember method_index_;
+
+    private StructMember hotness_count_;
+
+    private StructMember dex_cache_resolved_methods_;
+
+    private StructMember data_;
+
+    private StructMember entry_point_from_quick_compiled_code_;
 
     public ArtMethod_API26_27(Method method){
         super(method);
 
+        declaring_class_ = new StructMember(methodAddress, 0,4);
+
+        access_flags_ = new StructMember(methodAddress, 4,4);
+
         dex_code_item_offset_ = new StructMember(methodAddress,8,4);
 
+        dex_method_index_ = new StructMember(methodAddress, 12, 4);
+
+        method_index_ = new StructMember(methodAddress, 16, 2);
+
+        hotness_count_ = new StructMember(methodAddress, 18, 2);
+
+        dex_cache_resolved_methods_ = new StructMember(methodAddress, 20, 4);
+
+        data_ = new StructMember(methodAddress, 24, 4);
+
+        entry_point_from_quick_compiled_code_ = new StructMember(methodAddress, 28, 4);
+
     }
+
+    public int getDeclaringClass() {
+        return declaring_class_.readInt();
+    }
+
+    public int getAccessFlags() {
+        return access_flags_.readInt();
+    }
+
     public int getDexCodeItemOffset() {
         return dex_code_item_offset_.readInt();
+    }
+
+    public int getDexMethodIndex() {
+        return dex_method_index_.readShort();
+    }
+
+    public short getMethodIndex() {
+        return method_index_.readShort();
+    }
+
+    public int getHotnessCount() {
+        return hotness_count_.readShort();
+    }
+
+    public int getDexCacheResolvedMethods() {return dex_cache_resolved_methods_.readInt(); }
+
+    public int getData() {
+        return data_.readInt();
+    }
+
+    public int getEntryPointFromQuickCompiledCode() {
+        return entry_point_from_quick_compiled_code_.readInt();
     }
 
 }
