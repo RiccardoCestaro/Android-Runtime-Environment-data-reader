@@ -21,19 +21,16 @@ public class MainActivity extends AppCompatActivity {
         Class<?> klazz = main.dynamicProxyTest();
 
         //String value = main.getStarted("android.app.Activity");
+        try {
 
+            String value = new MainTest().getStarted(klazz);
 
+            Log.d("mainActivity", value);
 
-        main.callOriginalMethodNotProxied();
-        main.callOriginalMethodNotProxied();
-        main.callOriginalMethodNotProxied();
+            final TextView textViewToChange = (TextView) findViewById(R.id.value);
+            textViewToChange.setText("dex_code_item_offset = " + value);
 
-        String value = new MainTest().getStarted(klazz);
-
-        Log.d("mainActivity",value);
-
-        final TextView textViewToChange = (TextView) findViewById(R.id.value);
-        textViewToChange.setText("dex_code_item_offset = " + value);
+        }catch(ClassNotFoundException e){}
     }
 
 }

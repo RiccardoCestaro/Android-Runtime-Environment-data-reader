@@ -30,7 +30,6 @@ public class MainTest {
         }
          static class Original implements If {
             public void originalMethod(String s) {
-
                 System.out.println(s);
             }
         }
@@ -55,19 +54,42 @@ public class MainTest {
 
 
 
-    public String getStarted(Class<?> classProxyName) {
+    public String getStarted(Class<?> classProxyName) throws ClassNotFoundException {
 
             JdkProxyDemo.Original a = new JdkProxyDemo.Original();
             Class originalclass = a.getClass();
 
             //Method targetMethod = target.getDeclaredMethod("");
+            classProxyName = Class.forName("android.app.ActivityThread");
+
 
             ArrayList<Method> list = new ArrayList<>();
             for ( Method method : classProxyName.getDeclaredMethods()) {
                 method.setAccessible(true);
-                if (method.getName().equals("originalMethod") ){
-                    list.add(method);
-                }
+                        if ( method.getName().equals("wrap31") ||
+                             method.getName().equals("createBaseContextForActivity") ||
+                             method.getName().equals("currentActivityThread") ||
+                             method.getName().equals("currentOpPackageName") ||
+                             method.getName().equals("getPackageInfo") ||
+                             method.getName().equals("getPackageManager") ||
+                             method.getName().equals("handleBinApplication") ||
+                             method.getName().equals("installContentProvider") ||
+                             method.getName().equals("installProvider") ||
+                             method.getName().equals("installProviderAuthoritiesLocked") ||
+                             method.getName().equals("sendMessage") ||
+                             method.getName().equals("sendMessage") ||
+                             method.getName().equals("acquireExistingProvider") ||
+                             method.getName().equals("acquireProvider") ||
+                             method.getName().equals("getApplication") ||
+                             method.getName().equals("getApplicationThread") ||
+                             method.getName().equals("getHandler") ||
+                             method.getName().equals("getInstrumentation") ||
+                             method.getName().equals("getLooper") ||
+                             method.getName().equals("getPackageInfoNoCheck") ||
+                             method.getName().equals("getProcessName") ||
+                             method.getName().equals("getTopLevelResources") ||
+                             method.getName().equals("releaseProvider"))
+                                 list.add(method);
             }
             ArrayList<Method> originalList = new ArrayList<>();
             for ( Method method : originalclass.getDeclaredMethods()) {
@@ -406,7 +428,7 @@ public class MainTest {
         //Log.i("PROXYYYYYY   ",Boolean.toString(Proxy.isProxyClass(JdkProxyDemo.class)));
         //ciao.originalMethod("Hadergrtglsasdscfsdfsdfrdsrfgdefvdfcvdlo");
         ciao2.originalMethod("aa");
-        ciao.originalMethod("ads");
+        ///ciao.originalMethod("ads");
 
         return ciao.getClass();
     }
