@@ -120,7 +120,7 @@
  *
  *   ***************************
  *          * offset * length  *
- *   32 bit *   72        4    *
+ *   32 bit *   64        4    *
  *   64 bit *                  *
  *   ***************************
  *
@@ -132,7 +132,7 @@
  *
  *   ***************************
  *          * offset * length  *
- *   32 bit *   76        4    *
+ *   32 bit *   68        4    *
  *   64 bit *                  *
  *   ***************************
  *
@@ -148,13 +148,83 @@ import java.lang.reflect.Method;
 
 public class ArtMethod_API21 extends ArtMethod{
 
+    private StructMember declaring_class_;
+
+    private StructMember dex_cache_resolved_methods_;
+
+    private StructMember dex_cache_resolved_types_;
+
+    private StructMember dex_cache_strings_;
+
+    private StructMember entry_point_from_interpreter_;
+
+    private StructMember entry_point_from_jni_;
+
+    private StructMember entry_point_from_portable_compiled_code_;
+
+    private StructMember entry_point_from_quick_compiled_code_;
+
+    private StructMember gc_map_;
+
+    private StructMember access_flags_;
+
     private StructMember dex_code_item_offset_;
+
+    private StructMember dex_method_index_;
+
+    private StructMember method_index_;
 
     public ArtMethod_API21(Method method){
         super(method);
 
+        declaring_class_ = new StructMember(methodAddress, 0,4);
+
+        dex_cache_resolved_methods_ = new StructMember(methodAddress, 4,4);
+
+        dex_cache_resolved_types_ = new StructMember(methodAddress, 8,4);
+
+        dex_cache_strings_ = new StructMember(methodAddress, 12,4);
+
+        entry_point_from_interpreter_ = new StructMember(methodAddress, 16,8);
+
+        entry_point_from_jni_ = new StructMember(methodAddress, 24,8);
+
+        entry_point_from_portable_compiled_code_ = new StructMember(methodAddress, 32,8);
+
+        entry_point_from_quick_compiled_code_ = new StructMember(methodAddress, 40,8);
+
+        gc_map_ = new StructMember(methodAddress, 48,8);
+
+        access_flags_ = new StructMember(methodAddress, 56,4);
+
         dex_code_item_offset_ = new StructMember(methodAddress,60,4);
+
+        dex_method_index_ = new StructMember(methodAddress, 64,4);
+
+        method_index_ = new StructMember(methodAddress, 68,4);
+
+
     }
+
+    public int getDeclaringClass() { return declaring_class_.readInt(); }
+
+    public int getDexCacheResolvedMethod() { return dex_cache_resolved_methods_.readInt(); }
+
+    public int getDexCacheResolvedTypes() {return dex_cache_resolved_types_.readInt(); }
+
+    public int getDexCacheStrings() { return dex_cache_strings_.readInt(); }
+
+    public long getEntryPointFromInterpreter() { return entry_point_from_interpreter_.readLong(); }
+
+    public long getEntryPointFromJni() { return entry_point_from_jni_.readLong(); }
+
+    public long getEntryPointFromPortableCompiledCode() { return entry_point_from_portable_compiled_code_.readLong(); }
+
+    public long getEntryPointFromQuickCompiledCode() { return entry_point_from_quick_compiled_code_.readLong(); }
+
+    public long getGcMap() { return gc_map_.readLong(); }
+
+    public int getAccessFlags() { return access_flags_.readInt(); }
 
     public int getDexCodeItemOffset() {
         try {
@@ -173,5 +243,9 @@ public class ArtMethod_API21 extends ArtMethod{
         }
         return dex_code_item_offset_.readInt();
     }
+
+    public int getDexMethodIndex() { return dex_method_index_.readInt(); }
+
+    public int getMethodIndex() { return method_index_.readInt(); }
 
 }

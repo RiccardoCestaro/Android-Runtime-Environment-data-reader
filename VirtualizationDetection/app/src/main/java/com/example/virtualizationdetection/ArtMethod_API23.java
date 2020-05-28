@@ -121,20 +121,77 @@
 package com.example.virtualizationdetection;
 
 import java.lang.reflect.Method;
+import java.sql.Struct;
 
 public class ArtMethod_API23 extends ArtMethod{
 
+    private StructMember declaring_class_;
+
+    private StructMember dex_cache_resolved_methods_;
+
+    private StructMember dex_cache_resolved_types_;
+
+    private StructMember access_flags_;
+
     private StructMember dex_code_item_offset_;
+
+    private StructMember dex_method_index_;
+
+    private StructMember method_index_;
+
+    private StructMember entry_point_from_interpreter_;
+
+    private StructMember entry_point_from_jni_;
+
+    private StructMember entry_point_from_quick_compiled_code_;
 
     public ArtMethod_API23(Method method){
         super(method);
 
+        declaring_class_ = new StructMember(methodAddress, 0, 4);
+
+        dex_cache_resolved_methods_ = new StructMember(methodAddress, 4, 4);
+
+        dex_cache_resolved_types_ = new StructMember(methodAddress, 8, 12);
+
+        access_flags_ = new StructMember(methodAddress, 12, 4);
+
         dex_code_item_offset_ = new StructMember(methodAddress,16,4);
 
+        dex_method_index_ = new StructMember(methodAddress, 20, 4);
+
+        method_index_ = new StructMember(methodAddress, 24,4);
+
+        entry_point_from_interpreter_ = new StructMember(methodAddress, 28,4);
+
+        entry_point_from_jni_ = new StructMember(methodAddress, 32, 4);
+
+        entry_point_from_quick_compiled_code_ = new StructMember(methodAddress,36,4);
+
+
+
     }
+
+    public int getDeclaringClass() { return declaring_class_.readInt(); }
+
+    public int getDexCacheResolvedMethod() { return dex_cache_resolved_methods_.readInt(); }
+
+    public int getDexCacheResolvedTypes() {return dex_cache_resolved_types_.readInt(); }
+
+    public int getAccessFlags() { return access_flags_.readInt(); }
 
     public int getDexCodeItemOffset() {
         return dex_code_item_offset_.readInt();
     }
+
+    public int getDexMethodIndex() { return dex_method_index_.readInt(); }
+
+    public int getMethodIndex() { return method_index_.readInt(); }
+
+    public int getEntryPointFromInterpreter() { return entry_point_from_interpreter_.readInt(); }
+
+    public int getEntryPointFromJni() { return entry_point_from_jni_.readInt(); }
+
+    public int getEntryPointFromQuickCompiledCode() { return entry_point_from_quick_compiled_code_.readInt(); }
 
 }
