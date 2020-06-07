@@ -171,22 +171,22 @@ public class ArtMethod_API23 extends ArtMethod{
 
 
     }
-
+    @Override
     public int getDeclaringClass() { return declaring_class_.readInt(); }
 
     public int getDexCacheResolvedMethod() { return dex_cache_resolved_methods_.readInt(); }
 
     public int getDexCacheResolvedTypes() {return dex_cache_resolved_types_.readInt(); }
-
+    @Override
     public int getAccessFlags() { return access_flags_.readInt(); }
-
+    @Override
     public int getDexCodeItemOffset() {
         return dex_code_item_offset_.readInt();
     }
-
+    @Override
     public int getDexMethodIndex() { return dex_method_index_.readInt(); }
-
-    public int getMethodIndex() { return method_index_.readInt(); }
+    @Override
+    public long getMethodIndex() { return method_index_.readInt(); }
 
     public int getEntryPointFromInterpreter() { return entry_point_from_interpreter_.readInt(); }
 

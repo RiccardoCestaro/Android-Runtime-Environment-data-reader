@@ -205,7 +205,7 @@ public class ArtMethod_API21 extends ArtMethod{
 
 
     }
-
+    @Override
     public int getDeclaringClass() { return declaring_class_.readInt(); }
 
     public int getDexCacheResolvedMethod() { return dex_cache_resolved_methods_.readInt(); }
@@ -223,9 +223,9 @@ public class ArtMethod_API21 extends ArtMethod{
     public long getEntryPointFromQuickCompiledCode() { return entry_point_from_quick_compiled_code_.readLong(); }
 
     public long getGcMap() { return gc_map_.readLong(); }
-
+    @Override
     public int getAccessFlags() { return access_flags_.readInt(); }
-
+    @Override
     public int getDexCodeItemOffset() {
         try {
             Class<?> abstractMethodClass = Class.forName("java.lang.reflect.AbstractMethod");
@@ -243,9 +243,9 @@ public class ArtMethod_API21 extends ArtMethod{
         }
         return dex_code_item_offset_.readInt();
     }
-
+    @Override
     public int getDexMethodIndex() { return dex_method_index_.readInt(); }
-
-    public int getMethodIndex() { return method_index_.readInt(); }
+    @Override
+    public long getMethodIndex() { return method_index_.readInt(); }
 
 }

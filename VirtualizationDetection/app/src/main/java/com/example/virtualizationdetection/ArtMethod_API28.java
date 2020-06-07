@@ -145,25 +145,25 @@ public class ArtMethod_API28 extends ArtMethod{
         entry_point_from_quick_compiled_code_ = new StructMember(methodAddress, 24, 4);
 
     }
-
+    @Override
     public int getDeclaringClass() {
         return declaring_class_.readInt();
     }
-
+    @Override
     public int getAccessFlags() {
         return access_flags_.readInt();
     }
 
-
+    @Override
     public int getDexCodeItemOffset() {
         return dex_code_item_offset_.readInt();
     }
-
+    @Override
     public int getDexMethodIndex() {
         return dex_method_index_.readShort();
     }
-
-    public short getMethodIndex() {
+    @Override
+    public long getMethodIndex() {
         return method_index_.readShort();
     }
 

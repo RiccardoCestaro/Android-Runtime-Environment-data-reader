@@ -172,9 +172,9 @@ public class ArtMethod_API24_25 extends ArtMethod{
         entry_point_from_quick_compiled_code_ = new StructMember(methodAddress, 44, 8);
     }
 
-
+    @Override
     public int getDeclaringClass() { return declaring_class_.readInt(); }
-
+    @Override
     public int getAccessFlags() {
         String accessFlagFromJava="";
         try {
@@ -200,11 +200,11 @@ public class ArtMethod_API24_25 extends ArtMethod{
         return access_flags_.readInt();
     }
 
-
+    @Override
     public int getDexCodeItemOffset() {
         return dex_code_item_offset_.readInt();
     }
-
+    @Override
     public int getDexMethodIndex() {
 
 
@@ -232,8 +232,8 @@ public class ArtMethod_API24_25 extends ArtMethod{
 
         return accessFlags;
     }
-
-    public short getMethodIndex() {
+    @Override
+    public long getMethodIndex() {
 
 
         return method_index_.readShort(); }

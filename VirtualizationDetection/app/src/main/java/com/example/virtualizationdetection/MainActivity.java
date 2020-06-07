@@ -29,11 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1;
 
+    public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = getApplicationContext();
 
         if (Build.VERSION.SDK_INT >= 23)
         {
@@ -47,30 +50,21 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-
             // Code for Below 23 API Oriented Device
             // Do next code
         }
 
-        MainTest main = new MainTest();
-        Class<?> klazz = main.dynamicProxyTest();
-
-        //String value = main.getStarted("android.app.Activity");
         try {
 
-            String value = new MainTest().getStarted(klazz);
-
+            String value = new MainTest().getStarted();
 
             writeToFile(value);
-
-
-
 
 
             Log.d("mainActivity", value);
 
             final TextView textViewToChange = (TextView) findViewById(R.id.value);
-            textViewToChange.setText("dex_code_item_offset = " + value);
+            textViewToChange.setText(value);
 
         }catch(ClassNotFoundException e){}
     }

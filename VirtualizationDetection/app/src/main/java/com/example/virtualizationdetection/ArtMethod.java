@@ -50,6 +50,10 @@ public abstract  class ArtMethod {
     }
 
     public abstract int getDexCodeItemOffset();
+    public abstract int getDeclaringClass();
+    public abstract int getAccessFlags();
+    public abstract int getDexMethodIndex();
+    public abstract long getMethodIndex();
 
     @Override
     public String toString(){

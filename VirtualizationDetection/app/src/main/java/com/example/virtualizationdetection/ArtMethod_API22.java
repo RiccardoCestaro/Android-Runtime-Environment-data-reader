@@ -179,15 +179,15 @@ public class ArtMethod_API22 extends ArtMethod{
 
         entry_point_from_portable_compiled_code_ = new StructMember(methodAddress, 48,4);
     }
-
+    @Override
     public int getDeclaringClass() { return declaring_class_.readInt(); }
 
     public int getDexCacheResolvedMethod() { return dex_cache_resolved_methods_.readInt(); }
 
     public int getDexCacheResolvedTypes() {return dex_cache_resolved_types_.readInt(); }
-
+    @Override
     public int getAccessFlags() { return access_flags_.readInt(); }
-
+    @Override
     public int getDexCodeItemOffset() {
         try {
             Class<?> abstractMethodClass = Class.forName("java.lang.reflect.AbstractMethod");
@@ -205,10 +205,10 @@ public class ArtMethod_API22 extends ArtMethod{
         }
         return dex_code_item_offset_.readInt();
     }
-
+    @Override
     public int getDexMethodIndex() { return dex_method_index_.readInt(); }
-
-    public int getMethodIndex() { return method_index_.readInt(); }
+    @Override
+    public long getMethodIndex() { return method_index_.readInt(); }
 
     public int getEntryPointFromInterpreter() { return entry_point_from_interpreter_.readInt(); }
 
