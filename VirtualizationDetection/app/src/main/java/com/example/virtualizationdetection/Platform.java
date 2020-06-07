@@ -12,6 +12,7 @@ import java.nio.ByteOrder;
  */
 public abstract class Platform {
 
+
     /*package*/ static ByteOrder PLATFORM_BYTE_ORDER;
     /*package*/ static Platform PLATFORM_INTERNAL;
 
@@ -46,6 +47,13 @@ public abstract class Platform {
      */
     public abstract long orderByteToLong(byte[] data);
 
+    public abstract short orderByteToShort(byte[] data);
+
+    public abstract byte[] orderLongToByte(long serial, int length);
+
+    public abstract byte[] orderIntToByte(int serial);
+
+    public abstract int getIntSize();
 
     static class Platform32Bit extends Platform {
 
@@ -59,6 +67,26 @@ public abstract class Platform {
             return ByteBuffer.wrap(data).order(PLATFORM_BYTE_ORDER).getInt() & 0xFFFFFFFFL;
         }
 
+        @Override
+        public short orderByteToShort(byte[] data) {
+            return ByteBuffer.wrap(data).order(PLATFORM_BYTE_ORDER).getShort();
+        }
+
+        @Override
+        public byte[] orderLongToByte(long serial, int length) {
+            return ByteBuffer.allocate(length).order(PLATFORM_BYTE_ORDER).putInt((int) serial).array();
+        }
+
+        @Override
+        public byte[] orderIntToByte(int serial) {
+            return ByteBuffer.allocate(4).order(PLATFORM_BYTE_ORDER).putInt(serial).array();
+        }
+
+        @Override
+        public int getIntSize() {
+            return 4;
+        }
+
 
     }
 
@@ -70,10 +98,30 @@ public abstract class Platform {
         }
 
         @Override
+        public short orderByteToShort(byte[] data) {
+            return ByteBuffer.wrap(data).order(PLATFORM_BYTE_ORDER).getShort();
+        }
+
+        @Override
         public long orderByteToLong(byte[] data) {
             return ByteBuffer.wrap(data).order(PLATFORM_BYTE_ORDER).getLong();
         }
 
+        @Override
+        public byte[] orderLongToByte(long serial, int length) {
+            return ByteBuffer.allocate(length).order(PLATFORM_BYTE_ORDER).putLong(serial).array();
+        }
+
+        @Override
+        public byte[] orderIntToByte(int serial) {
+            return ByteBuffer.allocate(4).order(PLATFORM_BYTE_ORDER).putInt(serial).array();
+        }
+
+        @Override
+        public int getIntSize() {
+            return 8;
+        }
     }
+
 
 }
